@@ -452,6 +452,12 @@ class TestCarModelBase(unittest.TestCase):
         # TODO: fix notCar mismatch
         if not self.CP.notCar:
           checks['cruiseState'] += CS.cruiseState.enabled != self.safety.get_cruise_engaged_prev()
+          if CS.cruiseState.enabled != self.safety.get_cruise_engaged_prev():
+            for msg in filter(lambda m: m.src < 64, can[1]):
+              if msg.address == 452:
+                 print("Src:",msg.src," Msgs:",msg.address, "CS.enabled:", CS.cruiseState.enabled, "Safety Prev Enabled", self.safety.get_cruise_engaged_prev(), msg.dat)
+            
+            
       else:
         # Check for user button enable on rising edge of controls allowed
         button_enable = CS.buttonEnable and (not CS.brakePressed or CS.standstill)

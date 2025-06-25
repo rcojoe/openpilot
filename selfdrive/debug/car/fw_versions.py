@@ -54,7 +54,7 @@ if __name__ == "__main__":
   print(f'RX: {hex(vin_rx_addr)}, BUS: {vin_rx_bus}, VIN: {vin}')
   print(f"Getting VIN took {time.time() - t:.3f} s")
   print()
-
+  quit()
   t = time.time()
   fw_vers = get_fw_versions(*can_callbacks, set_obd_multiplexing, query_brand=args.brand, extra=extra, num_pandas=num_pandas, progress=True)
   _, candidates = match_fw_to_car(fw_vers, vin)
